@@ -41,7 +41,13 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/users", (req, res) => {});
+router.get("/users", restricted, (req, res) => {
+  Users.find()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => res.send(err));
+});
 
 function generateToken(user) {
   const payload = {
