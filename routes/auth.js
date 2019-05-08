@@ -7,6 +7,8 @@ const router = express.Router();
 
 const Users = require("../database/models/User");
 
+const restricted = require("../middleware/restricted-middleware");
+
 router.post("/register", (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
@@ -41,7 +43,7 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/users", (req, res) => {
+router.get("/users", restricted, (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
