@@ -5,15 +5,15 @@ const secrets = require("../config/secrets");
 
 const router = express.Router();
 
-const User = require("../database/models/User");
+const Users = require("../database/models/User");
 
 router.post("/register", (req, res) => {
   let user = req.body;
-  const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
+  const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
   Users.add(user)
-    .then(saved => {
-      res.status(201).json(saved);
+    .then(user => {
+      res.status(201).json(user);
     })
     .catch(error => {
       res.status(500).json(error);
@@ -41,7 +41,7 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.get("/users", restricted, (req, res) => {
+router.get("/users", (req, res) => {
   Users.find()
     .then(users => {
       res.json(users);
