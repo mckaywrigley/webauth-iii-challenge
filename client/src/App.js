@@ -12,12 +12,12 @@ function App() {
     <div className="App">
       <h1>App</h1>
       <BrowserRouter>
-        <Link to="/signup" component={Signup} />
-        <Link to="/signin" component={Signin} />
-        <Link to="/users" component={Users} />
-        <Route exact path="/signup" />
-        <Route exact path="/signin" />
-        <Route exact path="/users" />
+        <Link to="/signup">Signup</Link>
+        <Link to="/signin">Signin</Link>
+        <Link to="/users">Users</Link>
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/signin" component={Signin} />
+        <Route exact path="/users" component={Users} />
       </BrowserRouter>
     </div>
   );
