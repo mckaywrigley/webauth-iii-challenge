@@ -51,6 +51,13 @@ router.get("/users", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
+router.get("/logout", (req, res) => {
+  if (req.session) {
+    return req.session.destroy();
+  }
+  return res.status(500).json({ error: "Could not logout the user." });
+});
+
 function generateToken(user) {
   const payload = {
     subject: user.id,
