@@ -14,7 +14,7 @@ class App extends Component {
     //   .get(`http://localhost:5000/api/logout`)
     //   .then(res => console.log(res))
     //   .catch(err => console.log(err));
-    localStorage.clear();
+    localStorage.removeItem("jwt");
   }
 
   render() {
@@ -26,9 +26,14 @@ class App extends Component {
           <Link to="/signin">Signin</Link>
           <Link to="/users">Users</Link>
           <button onClick={this.logout}>Logout</button>
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/signin" component={Signin} />
-          <Route exact path="/users" component={Users} />
+          <Route exact path="/signup" render={props => <Signup {...props} />} />
+          <Route exact path="/signin" render={props => <Signin {...props} />} />
+          <Route
+            exact
+            path="/users"
+            component={Users}
+            render={props => <Users {...props} />}
+          />
         </BrowserRouter>
       </div>
     );

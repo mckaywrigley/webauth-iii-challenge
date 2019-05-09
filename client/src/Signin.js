@@ -39,6 +39,7 @@ class Signup extends Component {
         this.setState({
           loggedIn: true
         });
+        this.props.history.push("/users");
       })
       .catch(err => console.log(err));
     this.setState({

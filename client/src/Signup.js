@@ -38,6 +38,7 @@ class Signup extends Component {
             } else {
               delete axios.defaults.headers.common["Authorization"];
             }
+            this.props.history.push("/users");
           })
           .catch(err => console.log(err));
       })
