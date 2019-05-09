@@ -10,10 +10,11 @@ import Users from "./Users";
 
 class App extends Component {
   logout() {
-    axios
-      .get(`http://localhost:5000/api/logout`)
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    // axios
+    //   .get(`http://localhost:5000/api/logout`)
+    //   .then(res => console.log(res))
+    //   .catch(err => console.log(err));
+    localStorage.clear();
   }
 
   render() {

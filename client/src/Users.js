@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import requiresAuth from "./requiresAuth";
 
 class Users extends Component {
   constructor() {
@@ -45,4 +46,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default requiresAuth(Users);
