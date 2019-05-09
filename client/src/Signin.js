@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 class Signup extends Component {
   constructor() {
@@ -21,13 +22,20 @@ class Signup extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const user = {
-      username: "",
-      password: ""
+      username: this.state.username,
+      password: this.state.password
     };
     axios
       .post(`http://localhost:5000/api/login`, user)
       .then(res => {
         console.log(res);
+        localStorage.setItem("jwt", res.data.token);
+        if (res.data.token) {
+          axios.defaults.headers.common["Authorization"] = res.data.token;
+        } else {
+          delete axios.defaults.headers.common["Authorization"];
+        }
+        const decoded = jwt_decode(res.data.token);
         this.setState({
           loggedIn: true
         });
@@ -37,6 +45,7 @@ class Signup extends Component {
       username: "",
       password: ""
     });
+    console.log(this.state);
   };
 
   render() {
